@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'stock.dart';
 import 'stock_bloc.dart';
 
-
 class StockPage extends StatelessWidget {
   StockPage({super.key});
 
@@ -37,7 +36,9 @@ class StockPage extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
+
                 const SizedBox(height: 20),
+
                 Text(
                   '\$${stock.price.toStringAsFixed(2)}',
                   style: TextStyle(
@@ -50,10 +51,42 @@ class StockPage extends StatelessWidget {
                         : Colors.black,
                   ),
                 ),
+
                 const SizedBox(height: 10),
+
                 Text(
                   'Daily Change: \$${stock.dailyChange.toStringAsFixed(2)}',
                   style: const TextStyle(fontSize: 18),
+                ),
+
+                const SizedBox(height: 30),
+
+                Wrap(
+                  alignment: WrapAlignment.center,
+                  spacing: 10,
+                  runSpacing: 10,
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {
+                        bloc.actionSink.add(StockAction.increase);
+                      },
+                      child: const Text('Bull Market'),
+                    ),
+
+                    ElevatedButton(
+                      onPressed: () {
+                        bloc.actionSink.add(StockAction.decrease);
+                      },
+                      child: const Text('Bear Market'),
+                    ),
+
+                    ElevatedButton(
+                      onPressed: () {
+                        bloc.actionSink.add(StockAction.reset);
+                      },
+                      child: const Text('Reset'),
+                    ),
+                  ],
                 ),
               ],
             );
